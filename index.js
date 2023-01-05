@@ -1,6 +1,11 @@
 const dotEnv = require("dotenv");
-const express = require('express')
+const express = require('express');
+const morgan = require('morgan');
+
 const app = express()
+
+// log every call (by default on screen)
+app.use(morgan());
 
 dotEnv.config({ path: "./config/config.env" });
 
