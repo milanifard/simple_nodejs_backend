@@ -26,6 +26,11 @@ app.use((req, res, next) => {
 // A new body object containing the parsed data is populated on the request object after the middleware
 app.use(express.json())
 
+// add swagger ui to the routes (use: HOST:PORT/api-docs)
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./config/swagger.json');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 // Routes
 app.use("/auth", require("./routers/auth"));
 
