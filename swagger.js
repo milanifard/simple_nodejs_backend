@@ -30,7 +30,7 @@ const doc = {
     },
     definitions: {
         login: {
-            user: "",
+            username: "",
             password: "",
         },
     }

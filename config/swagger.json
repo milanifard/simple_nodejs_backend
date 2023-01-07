@@ -30,14 +30,23 @@
   ],
   "paths": {
     "/auth/gettoken": {
-      "get": {
+      "post": {
         "tags": [],
         "summary": "test",
         "description": "",
         "produces": [
           "application/json"
         ],
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "login",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/login"
+            }
+          }
+        ],
         "responses": {}
       }
     }
@@ -46,7 +55,7 @@
     "login": {
       "type": "object",
       "properties": {
-        "user": {
+        "username": {
           "type": "string",
           "example": ""
         },
