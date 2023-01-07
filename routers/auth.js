@@ -13,16 +13,22 @@ router.post('/gettoken', async (req, res)=> {
                required: true,
                schema: { $ref: "#/definitions/login" }
     } */
-
-    const list = await sequelize.query(`select * from users where username=:username and password=:password`,  
-                { type: QueryTypes.SELECT, replacements: { username: req.body.username, password: req.body.password }, raw: true });    
-    if(list.length>0) 
+    try
     {
-        res.set(200).send(`{ token: "testtoken" }`) 
+        const list = await sequelize.query(`select * from users where username=:username and password=:password`,  
+                    { type: QueryTypes.SELECT, replacements: { username: req.body.username, password: req.body.password }, raw: true });    
+        if(list.length>0) 
+        {
+            res.set(200).send(`{ token: "testtoken" }`) 
+        }
+        else
+        {
+            res.set(404).send(`Not found!`) 
+        }
     }
-    else
+    catch(err)
     {
-        res.set(404).send(`Not found!`) 
+        res.set(500).send(err.message); // err.stack
     }
 } );
 
